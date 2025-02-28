@@ -1,4 +1,6 @@
 using BillingManager.Infra.Data;
+using BillingManager.Infra.Data.Repositories;
+using BillingManager.Infra.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 #region Constants
@@ -12,13 +14,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddControllers();
+
 // Entity Framework Configuration
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString(CONNECTION_STRING_NAME));
 });
 
-builder.Services.AddControllers();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 

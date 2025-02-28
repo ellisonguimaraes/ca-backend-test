@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ACB3C4BE-69D2-4F47-9740-A3800E7540FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.API", "src\BillingManager.API\BillingManager.API.csproj", "{594D8881-D156-418F-B4B7-73A0CEF119C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.Application", "src\BillingManager.Application\BillingManager.Application.csproj", "{1CEC3B2A-945F-4F26-AB04-28301288A65F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.Domain", "src\BillingManager.Domain\BillingManager.Domain.csproj", "{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.Infra.CrossCutting.IoC", "src\BillingManager.Infra.CrossCutting.IoC\BillingManager.Infra.CrossCutting.IoC.csproj", "{3BB48570-488F-45F6-B2A6-40E030E1D790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.Infra.Data", "src\BillingManager.Infra.Data\BillingManager.Infra.Data.csproj", "{6F139A31-1823-4323-8637-8D5454D848F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillingManager.Services", "src\BillingManager.Services\BillingManager.Services.csproj", "{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{594D8881-D156-418F-B4B7-73A0CEF119C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{594D8881-D156-418F-B4B7-73A0CEF119C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{594D8881-D156-418F-B4B7-73A0CEF119C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{594D8881-D156-418F-B4B7-73A0CEF119C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CEC3B2A-945F-4F26-AB04-28301288A65F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CEC3B2A-945F-4F26-AB04-28301288A65F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CEC3B2A-945F-4F26-AB04-28301288A65F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CEC3B2A-945F-4F26-AB04-28301288A65F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BB48570-488F-45F6-B2A6-40E030E1D790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BB48570-488F-45F6-B2A6-40E030E1D790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BB48570-488F-45F6-B2A6-40E030E1D790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BB48570-488F-45F6-B2A6-40E030E1D790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F139A31-1823-4323-8637-8D5454D848F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F139A31-1823-4323-8637-8D5454D848F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F139A31-1823-4323-8637-8D5454D848F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F139A31-1823-4323-8637-8D5454D848F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{594D8881-D156-418F-B4B7-73A0CEF119C9} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+		{1CEC3B2A-945F-4F26-AB04-28301288A65F} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+		{F7E18CAF-6DB7-44E4-B06D-E84178FEDB02} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+		{3BB48570-488F-45F6-B2A6-40E030E1D790} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+		{6F139A31-1823-4323-8637-8D5454D848F3} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+		{0551DF29-6DD5-4AD7-BCA6-02EB2DEA9547} = {ACB3C4BE-69D2-4F47-9740-A3800E7540FB}
+	EndGlobalSection
+EndGlobal

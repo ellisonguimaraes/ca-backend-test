@@ -20,19 +20,22 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
     /// <summary>
     /// Get paged entity list
     /// </summary>
-    /// <param name="parameters">Page number and page size</param>
+    /// <param name="pageNumber">Page number</param>
+    /// <param name="pageSize">Page size</param>
     /// <returns>Entity paged list</returns>
-    Task<PagedList<TEntity>> GetPaginate(PaginationParameters parameters);
+    Task<PagedList<TEntity>> GetPaginateAsync(int pageNumber, int pageSize);
 
     /// <summary>
     /// Get paged entity list (with filter and order by property)
     /// </summary>
-    /// <param name="parameters">Page number and page size</param>
+    /// <param name="pageNumber">Page number</param>
+    /// <param name="pageSize">Page size</param>
     /// <param name="orderByProperty">Order by property (lambda expression)</param>
     /// <param name="expression">Filter expression (lambda expression)</param>
     /// <returns>Returns paged, filtered and sorted entity</returns>
-    Task<PagedList<TEntity>> GetPaginate<TKey>(
-        PaginationParameters parameters,
+    Task<PagedList<TEntity>> GetPaginateAsync<TKey>(
+        int pageNumber, 
+        int pageSize,
         Expression<Func<TEntity, TKey>> orderByProperty,
         Expression<Func<TEntity, bool>>? expression = null);
 

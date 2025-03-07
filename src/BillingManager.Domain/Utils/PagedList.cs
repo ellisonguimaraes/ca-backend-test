@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace BillingManager.Domain.Utils;
 
 /// <summary>
@@ -5,16 +7,22 @@ namespace BillingManager.Domain.Utils;
 /// </summary>
 public class PagedList<T> : List<T>
 {
+    [JsonPropertyName("current_page")]
     public int CurrentPage { get; }
     
+    [JsonPropertyName("total_pages")]
     public int TotalPages { get; }
     
+    [JsonPropertyName("page_size")]
     public int PageSize { get; }
     
+    [JsonPropertyName("total_count")]
     public int TotalCount { get; }
     
+    [JsonPropertyName("has_previous")]
     public bool HasPrevious => CurrentPage > 1;
     
+    [JsonPropertyName("has_next")]
     public bool HasNext => CurrentPage < TotalPages;
     
     public PagedList(IQueryable<T> source, int pageNumber, int pageSize)

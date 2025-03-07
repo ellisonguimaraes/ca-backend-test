@@ -22,7 +22,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
         new BillingLineEntityConfiguration().Configure(modelBuilder.Entity<BillingLine>());
         new CustomerEntityTypeConfiguration().Configure(modelBuilder.Entity<Customer>());
         new ProductEntityConfiguration().Configure(modelBuilder.Entity<Product>());
-
+        
         AppContext.SetSwitch(NPGSQL_ENABLELEGACYTIMESTAMPBEHAVIOR_NAME, HAS_NPGSQL_ENABLELEGACYTIMESTAMPBEHAVIOR);
 
         base.OnModelCreating(modelBuilder);

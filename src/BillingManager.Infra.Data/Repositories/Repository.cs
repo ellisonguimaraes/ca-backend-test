@@ -15,18 +15,19 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
     public virtual async Task<TEntity?> GetByIdAsync(Guid id)
         => await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id));
 
-    public virtual Task<PagedList<TEntity>> GetPaginate(PaginationParameters parameters)
+    public virtual Task<PagedList<TEntity>> GetPaginateAsync(int pageNumber, int pageSize)
         => Task.FromResult(new PagedList<TEntity>(
                 DbSet.OrderBy(i => i.Id),
-                parameters.PageNumber,
-                parameters.PageSize
+                pageNumber,
+                pageSize
             ));
 
-    public virtual Task<PagedList<TEntity>> GetPaginate<TKey>(
-        PaginationParameters parameters, 
+    public virtual Task<PagedList<TEntity>> GetPaginateAsync<TKey>(
+        int pageNumber, 
+        int pageSize, 
         Expression<Func<TEntity, TKey>> orderByProperty,
         Expression<Func<TEntity, bool>>? expression = null)
-        => BuildPagedList(DbSet, parameters, orderByProperty, expression);
+        => BuildPagedList(DbSet, pageNumber, pageSize, orderByProperty, expression);
 
     /// <summary>
     /// Build Paged List
@@ -38,7 +39,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
     /// <returns>Returns paged, filtered and sorted entity</returns>
     protected Task<PagedList<TEntity>> BuildPagedList<TKey>(
         IQueryable<TEntity> queryable,
-        PaginationParameters parameters,
+        int pageNumber, 
+        int pageSize,
         Expression<Func<TEntity, TKey>> orderByProperty,
         Expression<Func<TEntity, bool>>? expression = null)
         => Task.FromResult(new PagedList<TEntity>(
@@ -48,8 +50,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
                 : queryable
                     .Where(expression)
                     .OrderBy(orderByProperty),
-            parameters.PageNumber,
-            parameters.PageSize
+            pageNumber,
+            pageSize
         ));
 
     public virtual async Task<TEntity> CreateAsync(TEntity entity)

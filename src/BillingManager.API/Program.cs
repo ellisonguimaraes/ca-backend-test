@@ -1,11 +1,8 @@
-using BillingManager.Infra.Data;
-using BillingManager.Infra.Data.Repositories;
-using BillingManager.Infra.Data.Repositories.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using BillingManager.Infra.CrossCutting.IoC;
+using Microsoft.AspNetCore.Http.Json;
 
-#region Constants
-const string CONNECTION_STRING_NAME = "DefaultConnection";
-#endregion
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,15 +11,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddControllers();
-
-// Entity Framework Configuration
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.Configure<JsonOptions>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString(CONNECTION_STRING_NAME));
+    options.SerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower;
 });
 
-builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+builder.Services.AddControllers();
+
+builder.Services
+    .RegisterHandlers()
+    .RegisterMappers()
+    .RegisterDbContextAndRepositories(builder.Configuration);
 
 var app = builder.Build();
 

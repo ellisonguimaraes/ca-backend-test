@@ -24,4 +24,10 @@
     <data name="NOT_FOUND_ERROR_CODE" xml:space="preserve">
         <value>BS001</value>
     </data>
+    <data name="NOT_MAPPED_EXCEPTION_ERROR_CODE" xml:space="preserve">
+        <value>AL001</value>
+    </data>
+    <data name="NOT_MAPPED_EXCEPTION_ERROR_MESSAGE" xml:space="preserve">
+        <value>An unexpected error occurred</value>
+    </data>
 </root>

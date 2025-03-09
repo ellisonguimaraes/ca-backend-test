@@ -1,8 +1,7 @@
 using System.Text.Json;
+using BillingManager.API.Middlewares;
 using BillingManager.Infra.CrossCutting.IoC;
 using Microsoft.AspNetCore.Http.Json;
-
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,15 +17,21 @@ builder.Services.Configure<JsonOptions>(options =>
 
 builder.Services.AddControllers();
 
+builder.Logging.LoggerConfiguration(builder.Configuration);
+
 builder.Services
-    .RegisterHandlers()
+    .RegisterHandlersAndBehaviors()
     .RegisterMappers()
-    .RegisterDbContextAndRepositories(builder.Configuration);
+    .RegisterDbContextAndRepositories(builder.Configuration)
+    .RegisterConfigurationFiles(builder.Configuration)
+    .RegisterExceptionHandlers();
 
 var app = builder.Build();
 
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 app.MapControllers();
 

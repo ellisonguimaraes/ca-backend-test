@@ -1,17 +1,17 @@
+using System.Text.Json;
+using BillingManager.Application.Commands.Products.Create;
+using BillingManager.Application.Commands.Products.Update;
+using BillingManager.Application.Queries.Products.GetAll;
+using BillingManager.Application.Queries.Products.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using BillingManager.Application.Commands.Customers.Create;
-using BillingManager.Application.Queries.Customers.GetAll;
-using System.Text.Json;
-using BillingManager.Application.Commands.Customers.Update;
-using BillingManager.Application.Queries.Customers.GetById;
 using HttpResponse = BillingManager.Domain.Utils.HttpResponse;
 
 namespace BillingManager.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class CustomerController(IMediator mediator) : ControllerBase
+public class ProductController(IMediator mediator) : ControllerBase
 {
     #region Constants
     private const string X_PAGINATION = "X-Pagination";
@@ -22,12 +22,12 @@ public class CustomerController(IMediator mediator) : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> GetByIdAsync([FromRoute(Name = ID)] Guid id)
     {
-        var response = await mediator.Send(new GetCustomerByIdQuery { Id = id });
+        var response = await mediator.Send(new GetProductByIdQuery { Id = id });
         return Ok(new HttpResponse { Data = response });
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetPaginateAsync([FromQuery] GetAllCustomerQuery query)
+    public async Task<IActionResult> GetPaginateAsync([FromQuery] GetAllProductQuery query)
     {
         var response = await mediator.Send(query);
     
@@ -42,12 +42,12 @@ public class CustomerController(IMediator mediator) : ControllerBase
         };
 
         Response.Headers.Append(X_PAGINATION, JsonSerializer.Serialize(metadata));
-
+        
         return Ok(new HttpResponse { Data = response });
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateAsync([FromBody] CreateCustomerCommand command)
+    public async Task<IActionResult> CreateAsync([FromBody] CreateProductCommand command)
     {
         var response = await mediator.Send(command);
         return Ok(new HttpResponse { Data = response });
@@ -57,7 +57,7 @@ public class CustomerController(IMediator mediator) : ControllerBase
     [Route("{id:guid}")]
     public async Task<IActionResult> UpdateAsync(
         [FromRoute(Name = ID)] Guid id, 
-        [FromBody] UpdateCustomerCommand command)
+        [FromBody] UpdateProductCommand command)
     {
         command.Id = id;
         var response = await mediator.Send(command);

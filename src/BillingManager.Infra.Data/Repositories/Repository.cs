@@ -1,5 +1,7 @@
 using System.Linq.Expressions;
 using BillingManager.Domain.Entities;
+using BillingManager.Domain.Exceptions;
+using BillingManager.Domain.Resources;
 using BillingManager.Domain.Utils;
 using BillingManager.Infra.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +15,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
     protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
     public virtual async Task<TEntity?> GetByIdAsync(Guid id)
-        => await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id));
+        => await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id))
+           ?? throw new BusinessException(ErrorsResource.NOT_FOUND_ERROR_CODE, string.Format(ErrorsResource.NOT_FOUND_ERROR_MESSAGE, typeof(TEntity).Name));
 
     public virtual Task<PagedList<TEntity>> GetPaginateAsync(int pageNumber, int pageSize)
         => Task.FromResult(new PagedList<TEntity>(
@@ -67,7 +70,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
 
     public virtual async Task<TEntity> UpdateAsync(TEntity entity)
     {
-        var dbEntity = await DbSet.SingleAsync(e => e.Id.Equals(entity.Id));
+        var dbEntity = await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(entity.Id))
+                       ?? throw new BusinessException(ErrorsResource.NOT_FOUND_ERROR_CODE, string.Format(ErrorsResource.NOT_FOUND_ERROR_MESSAGE, typeof(TEntity).Name));
 
         dbEntity.UpdatedAt = DateTime.UtcNow;
         
@@ -81,7 +85,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
 
     public virtual async Task<TEntity> DeleteAsync(Guid id)
     {
-        var entity = await DbSet.SingleAsync(e => e.Id.Equals(id));
+        var entity = await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id)) 
+                     ?? throw new BusinessException(ErrorsResource.NOT_FOUND_ERROR_CODE, string.Format(ErrorsResource.NOT_FOUND_ERROR_MESSAGE, typeof(TEntity).Name));
 
         DbSet.Remove(entity);
         await Context.SaveChangesAsync();

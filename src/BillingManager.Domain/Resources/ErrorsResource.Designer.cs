@@ -21,11 +21,11 @@ namespace BillingManager.Domain.Resources {
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ErrorsResource() {
+        public ErrorsResource() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Resources.ResourceManager ResourceManager {
+        public static System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.Equals(null, resourceMan)) {
                     System.Resources.ResourceManager temp = new System.Resources.ResourceManager("BillingManager.Domain.Resources.ErrorsResource", typeof(ErrorsResource).Assembly);
@@ -36,7 +36,7 @@ namespace BillingManager.Domain.Resources {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static System.Globalization.CultureInfo Culture {
+        public static System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -54,6 +54,18 @@ namespace BillingManager.Domain.Resources {
         public static string NOT_FOUND_ERROR_CODE {
             get {
                 return ResourceManager.GetString("NOT_FOUND_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string NOT_MAPPED_EXCEPTION_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("NOT_MAPPED_EXCEPTION_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string NOT_MAPPED_EXCEPTION_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("NOT_MAPPED_EXCEPTION_ERROR_MESSAGE", resourceCulture);
             }
         }
     }

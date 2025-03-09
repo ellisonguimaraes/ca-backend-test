@@ -5,7 +5,14 @@ metadata:
 data:
   POSTGRES_DB: billingmanagerdb
   POSTGRES_USER: user01
-  POSTGRES_PASSWORD: Abcd@1234
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secret
+type: Opaque
+data:
+  POSTGRES_PASSWORD: QWJjZEAxMjM0 # Abcd@1234
 ---
 apiVersion: apps/v1
 kind: StatefulSet
@@ -31,6 +38,12 @@ spec:
         envFrom:
         - configMapRef:
             name: postgres-config
+        env:
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-secret
+              key: POSTGRES_PASSWORD
         volumeMounts:
         - name: postgres-storage
           mountPath: /var/lib/postgresql/data
@@ -41,7 +54,7 @@ spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
-          storage: 1Gi
+          storage: 4Gi
 ---
 apiVersion: v1
 kind: Service
@@ -50,9 +63,11 @@ metadata:
   labels:
     app: postgres
 spec:
-  ports:
-  - port: 5432
-    name: postgres
-  clusterIP: None
   selector:
     app: postgres
+  type: NodePort
+  ports:
+  - protocol: TCP
+    port: 5432
+    targetPort: 5432
+    nodePort: 30002

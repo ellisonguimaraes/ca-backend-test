@@ -1,6 +1,8 @@
+using System.Reflection;
 using System.Text.Json;
 using BillingManager.API.Middlewares;
 using BillingManager.Infra.CrossCutting.IoC;
+using MediatR;
 using Microsoft.AspNetCore.Http.Json;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,7 @@ builder.Services
     .RegisterMappers()
     .RegisterDbContextAndRepositories(builder.Configuration)
     .RegisterConfigurationFiles(builder.Configuration)
+    .RegisterDistributedCache(builder.Configuration)
     .RegisterExceptionHandlers();
 
 var app = builder.Build();

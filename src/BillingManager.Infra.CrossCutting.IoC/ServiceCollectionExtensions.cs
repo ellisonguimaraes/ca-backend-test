@@ -4,16 +4,24 @@ using BillingManager.Application.Commands.Customers.Update;
 using BillingManager.Application.Commands.Products.Create;
 using BillingManager.Application.Commands.Products.Update;
 using BillingManager.Application.ExceptionHandlers;
+using BillingManager.Application.Notifications.DeleteAllPaginatedEntityInCache;
+using BillingManager.Application.Notifications.UpdateEntityInCache;
+using BillingManager.Application.Notifications.UpdatePaginateEntityInCache;
 using BillingManager.Application.Profiles;
 using BillingManager.Application.Queries.Customers.GetAll;
 using BillingManager.Application.Queries.Customers.GetById;
 using BillingManager.Application.Queries.Products.GetAll;
 using BillingManager.Application.Queries.Products.GetById;
+using BillingManager.Domain.Configurations;
 using BillingManager.Domain.Configurations.PerfomanceConfiguration;
+using BillingManager.Domain.Entities;
 using BillingManager.Domain.Exceptions;
+using BillingManager.Domain.Utils;
 using BillingManager.Infra.Data;
 using BillingManager.Infra.Data.Repositories;
 using BillingManager.Infra.Data.Repositories.Interfaces;
+using BillingManager.Services;
+using BillingManager.Services.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -37,6 +45,15 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(typeof(GetCustomerByIdQueryHandler).Assembly);
         services.AddMediatR(typeof(GetAllProductQueryHandler).Assembly);
         services.AddMediatR(typeof(GetProductByIdQueryHandler).Assembly);
+
+        services.AddTransient<INotificationHandler<UpdateEntityInCacheNotification<Customer>>, UpdateEntityInCacheNotificationHandler<Customer>>();
+        services.AddTransient<INotificationHandler<UpdateEntityInCacheNotification<Product>>, UpdateEntityInCacheNotificationHandler<Product>>();
+        
+        services.AddTransient<INotificationHandler<UpdatePaginateEntityInCacheNotification<PagedList<Customer>, Customer>>, UpdatePaginateEntityInCacheNotificationHandler<Customer>>();
+        services.AddTransient<INotificationHandler<UpdatePaginateEntityInCacheNotification<PagedList<Product>, Product>>, UpdatePaginateEntityInCacheNotificationHandler<Product>>();
+        
+        services.AddTransient<INotificationHandler<DeleteAllPaginatedEntityInCacheNotification<Customer>>, DeleteAllPaginatedEntityInCacheNotificationHandler<Customer>>();
+        services.AddTransient<INotificationHandler<DeleteAllPaginatedEntityInCacheNotification<Product>>, DeleteAllPaginatedEntityInCacheNotificationHandler<Product>>();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
         
@@ -80,6 +97,23 @@ public static class ServiceCollectionExtensions
             {
                 { typeof(BusinessException), provider.GetRequiredService<BusinessExceptionHandler>() }
             });
+        
+        return services;
+    }
+
+    public static IServiceCollection RegisterDistributedCache(this IServiceCollection services, IConfiguration configuration)
+    {
+        var redisSettings = configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()!;
+        
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisSettings.Host;
+            options.InstanceName = redisSettings.InstanceName;
+        });
+
+        services.AddScoped<ICachingService, RedisCachingService>();
+
+        services.AddSingleton(redisSettings);
         
         return services;
     }

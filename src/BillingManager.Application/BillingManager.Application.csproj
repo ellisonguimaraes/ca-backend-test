@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BillingManager.Infra.Data\BillingManager.Infra.Data.csproj" />
+    <ProjectReference Include="..\BillingManager.Services\BillingManager.Services.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,0 +1,380 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillingManager.Application</name>
+    </assembly>
+    <members>
+        <member name="T:BillingManager.Application.Behaviors.PerformanceBehavior`2">
+            <summary>
+            Performance behavior: Calculates the execution time of the handler and logs it if the time exceeds the allowed limit.
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Behaviors.PerformanceBehavior`2.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.Behaviors.PerformanceBehavior{`0,`1}},BillingManager.Domain.Configurations.PerfomanceConfiguration.PerformanceConfiguration)">
+            <summary>
+            Performance behavior: Calculates the execution time of the handler and logs it if the time exceeds the allowed limit.
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Commands.BaseCommandResponse">
+            <summary>
+            Base entity command response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.BaseCommandResponse.Id">
+            <summary>
+            Identifier
+            </summary>
+            <example>3fa85f64-5717-4562-b3fc-2c963f66afa6</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.BaseCommandResponse.CreatedAt">
+            <summary>
+            Created date
+            </summary>
+            <example>2025-03-10T15:19:12.885Z</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.BaseCommandResponse.UpdatedAt">
+            <summary>
+            Updated date
+            </summary>
+            <example>2025-03-10T15:19:12.885Z</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand">
+            <summary>
+            Create customer command
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand.Name">
+            <summary>
+            Customer name
+            </summary>
+            <example>Rafael</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand.Email">
+            <summary>
+            Email
+            </summary>
+            <example>rafael.souza@gmail.com</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand.Address">
+            <summary>
+            Address
+            </summary>
+            <example>Rua N, 723, Jardim Primavera - Ilheus/BA</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommandHandler">
+            <summary>
+            Create customer command handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommandHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Customer},AutoMapper.IMapper,MediatR.IMediator)">
+            <summary>
+            Create customer command handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Customers.CustomerCommandResponse">
+            <summary>
+            Generic customer command response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.CustomerCommandResponse.Name">
+            <summary>
+            Customer name
+            </summary>
+            <example>Rafael</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.CustomerCommandResponse.Email">
+            <summary>
+            Email
+            </summary>
+            <example>rafael.souza@gmail.com</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.CustomerCommandResponse.Address">
+            <summary>
+            Address
+            </summary>
+            <example>Rua N, 723, Jardim Primavera - Ilheus/BA</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommand">
+            <summary>
+            Update customer command
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommand.Name">
+            <summary>
+            Customer name
+            </summary>
+            <example>Rafael</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommand.Email">
+            <summary>
+            Email
+            </summary>
+            <example>rafael.souza@gmail.com</example>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommand.Address">
+            <summary>
+            Address
+            </summary>
+            <example>Rua N, 723, Jardim Primavera - Ilheus/BA</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommandHandler">
+            <summary>
+            Update customer command handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommandHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Customer},AutoMapper.IMapper,MediatR.IMediator)">
+            <summary>
+            Update customer command handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Products.Create.CreateProductCommand">
+            <summary>
+            Create product command
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Products.Create.CreateProductCommand.Name">
+            <summary>
+            Product name
+            </summary>
+            <example>Notebook</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Products.Create.CreateProductCommandHandler">
+            <summary>
+            Create product command handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Products.Create.CreateProductCommandHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},AutoMapper.IMapper,MediatR.IMediator)">
+            <summary>
+            Create product command handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Products.ProductCommandResponse">
+            <summary>
+            Generic product command response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Products.ProductCommandResponse.Name">
+            <summary>
+            Product name
+            </summary>
+            <example>Notebook</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Products.Update.UpdateProductCommand">
+            <summary>
+            Update product command
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Commands.Products.Update.UpdateProductCommand.Name">
+            <summary>
+            Product name
+            </summary>
+            <example>Notebook</example>
+        </member>
+        <member name="T:BillingManager.Application.Commands.Products.Update.UpdateProductCommandHandler">
+            <summary>
+            Update product command handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Products.Update.UpdateProductCommandHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},AutoMapper.IMapper,MediatR.IMediator)">
+            <summary>
+            Update product command handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler">
+            <summary>
+            Business exception handle
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler})">
+            <summary>
+            Business exception handle
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.ExceptionHandlers.IExceptionHandler">
+            <summary>
+            Exception handle interface
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.DeleteAllPaginatedEntityInCache.DeleteAllPaginatedEntityInCacheNotification`1">
+            <summary>
+            Notification to delete paginated data cache in DistributedCache.
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.DeleteAllPaginatedEntityInCache.DeleteAllPaginatedEntityInCacheNotificationHandler`1">
+            <summary>
+            Handler to delete paginated data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+        </member>
+        <member name="M:BillingManager.Application.Notifications.DeleteAllPaginatedEntityInCache.DeleteAllPaginatedEntityInCacheNotificationHandler`1.#ctor(BillingManager.Services.Interfaces.ICachingService)">
+            <summary>
+            Handler to delete paginated data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.UpdateEntityInCache.UpdateEntityInCacheNotification`1">
+            <summary>
+            Notification to update entity data cache in DistributedCache.
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.UpdateEntityInCache.UpdateEntityInCacheNotificationHandler`1">
+            <summary>
+            Handler to update entity data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+            <param name="configuration">Configuration file (appsettings)</param>
+        </member>
+        <member name="M:BillingManager.Application.Notifications.UpdateEntityInCache.UpdateEntityInCacheNotificationHandler`1.#ctor(BillingManager.Services.Interfaces.ICachingService,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Handler to update entity data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+            <param name="configuration">Configuration file (appsettings)</param>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.UpdatePaginateEntityInCache.UpdatePaginateEntityInCacheNotification`2">
+            <summary>
+            Notification to update paginated entity data cache in DistributedCache.
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Notifications.UpdatePaginateEntityInCache.UpdatePaginateEntityInCacheNotificationHandler`1">
+            <summary>
+            Handler to update paginated entity data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+            <param name="configuration">Configuration file (appsettings)</param>
+        </member>
+        <member name="M:BillingManager.Application.Notifications.UpdatePaginateEntityInCache.UpdatePaginateEntityInCacheNotificationHandler`1.#ctor(BillingManager.Services.Interfaces.ICachingService,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Handler to update paginated entity data cache in DistributedCache.
+            </summary>
+            <param name="cache">Cache service</param>
+            <param name="configuration">Configuration file (appsettings)</param>
+        </member>
+        <member name="T:BillingManager.Application.Profiles.CustomerProfile">
+            <summary>
+            AutoMapper profile for customer
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Profiles.ProductProfile">
+            <summary>
+            AutoMapper profile for product
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.BaseQueryResponse">
+            <summary>
+            Base entity queries response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Queries.BaseQueryResponse.Id">
+            <summary>
+            Identifier
+            </summary>
+            <example>3fa85f64-5717-4562-b3fc-2c963f66afa6</example>
+        </member>
+        <member name="P:BillingManager.Application.Queries.BaseQueryResponse.CreatedAt">
+            <summary>
+            Created date
+            </summary>
+            <example>2025-03-10T15:19:12.885Z</example>
+        </member>
+        <member name="P:BillingManager.Application.Queries.BaseQueryResponse.UpdatedAt">
+            <summary>
+            Updated date
+            </summary>
+            <example>2025-03-10T15:19:12.885Z</example>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Customers.CustomerQueryResponse">
+            <summary>
+            Generic customer query response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Queries.Customers.CustomerQueryResponse.Name">
+            <summary>
+            Customer name
+            </summary>
+            <example>Rafael</example>
+        </member>
+        <member name="P:BillingManager.Application.Queries.Customers.CustomerQueryResponse.Email">
+            <summary>
+            Email
+            </summary>
+            <example>rafael.souza@gmail.com</example>
+        </member>
+        <member name="P:BillingManager.Application.Queries.Customers.CustomerQueryResponse.Address">
+            <summary>
+            Address
+            </summary>
+            <example>Rua N, 723, Jardim Primavera - Ilheus/BA</example>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Customers.GetAll.GetAllCustomerQuery">
+            <summary>
+            Get all customers query (with pagination)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Customers.GetAll.GetAllCustomerQueryHandler">
+            <summary>
+            Get all customers handler (with pagination)
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Customers.GetAll.GetAllCustomerQueryHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Customer},BillingManager.Services.Interfaces.ICachingService,MediatR.IMediator,AutoMapper.IMapper)">
+            <summary>
+            Get all customers handler (with pagination)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Customers.GetById.GetCustomerByIdQuery">
+            <summary>
+            Get customer by id query
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Customers.GetById.GetCustomerByIdQueryHandler">
+            <summary>
+            Get customer by id handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Customers.GetById.GetCustomerByIdQueryHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Customer},BillingManager.Services.Interfaces.ICachingService,MediatR.IMediator,AutoMapper.IMapper)">
+            <summary>
+            Get customer by id handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Products.GetAll.GetAllProductQuery">
+            <summary>
+            Get all products query (with pagination)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Products.GetAll.GetAllProductQueryHandler">
+            <summary>
+            Get all products handler (with pagination)
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Products.GetAll.GetAllProductQueryHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},BillingManager.Services.Interfaces.ICachingService,MediatR.IMediator,AutoMapper.IMapper)">
+            <summary>
+            Get all products handler (with pagination)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Products.GetById.GetProductByIdQuery">
+            <summary>
+            Get product by id query
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Products.GetById.GetProductByIdQueryHandler">
+            <summary>
+            Get product by id handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Products.GetById.GetProductByIdQueryHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},BillingManager.Services.Interfaces.ICachingService,MediatR.IMediator,AutoMapper.IMapper)">
+            <summary>
+            Get product by id handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Queries.Products.ProductQueryResponse">
+            <summary>
+            Generic product query response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Application.Queries.Products.ProductQueryResponse.Name">
+            <summary>
+            Product name
+            </summary>
+            <example>Notebook</example>
+        </member>
+    </members>
+</doc>

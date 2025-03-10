@@ -25,4 +25,15 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Swashbuckle.AspNetCore.Annotations">
+      <HintPath>..\..\..\..\..\.nuget\packages\swashbuckle.aspnetcore.annotations\7.3.1\lib\net8.0\Swashbuckle.AspNetCore.Annotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <!-- SWAGGER XML COMMENTS -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 </Project>

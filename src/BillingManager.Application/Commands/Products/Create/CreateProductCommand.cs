@@ -8,6 +8,10 @@ namespace BillingManager.Application.Commands.Products.Create;
 /// </summary>
 public sealed class CreateProductCommand : IRequest<ProductCommandResponse>
 {
+    /// <summary>
+    /// Product name
+    /// </summary>
+    /// <example>Notebook</example>
     [JsonPropertyName("name")]
     public string Name { get; set; }
 }

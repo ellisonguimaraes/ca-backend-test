@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,5 +18,10 @@
     <ProjectReference Include="..\BillingManager.Application\BillingManager.Application.csproj" />
     <ProjectReference Include="..\BillingManager.Infra.CrossCutting.IoC\BillingManager.Infra.CrossCutting.IoC.csproj" />
   </ItemGroup>
-
+  
+  <!-- SWAGGER XML COMMENTS -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 </Project>

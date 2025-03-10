@@ -34,7 +34,10 @@ public static class ServiceCollectionExtensions
     #region Constants
     const string CONNECTION_STRING_NAME = "DefaultConnection";
     #endregion
-
+    
+    /// <summary>
+    /// Register command and queries handlers, notifications and behaviors
+    /// </summary>
     public static IServiceCollection RegisterHandlersAndBehaviors(this IServiceCollection services)
     {
         services.AddMediatR(typeof(CreateCustomerCommandHandler).Assembly);
@@ -59,7 +62,10 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-
+    
+    /// <summary>
+    /// Register mapper objects
+    /// </summary>
     public static IServiceCollection RegisterMappers(this IServiceCollection services)
     {
         services.AddAutoMapper(typeof(CustomerProfile));
@@ -67,7 +73,10 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-
+    
+    /// <summary>
+    /// Configure and register db context, and register repositories
+    /// </summary>
     public static IServiceCollection RegisterDbContextAndRepositories(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDbContext<ApplicationDbContext>(options =>
@@ -80,6 +89,9 @@ public static class ServiceCollectionExtensions
         return services;
     }
     
+    /// <summary>
+    /// Register configuration files in container
+    /// </summary>
     public static IServiceCollection RegisterConfigurationFiles(this IServiceCollection services, IConfiguration configuration)
     {
         var performanceConfiguration = configuration.GetSection(nameof(PerformanceConfiguration)).Get<PerformanceConfiguration>()!;
@@ -87,7 +99,10 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-
+    
+    /// <summary>
+    /// Register exception handlers
+    /// </summary>
     public static IServiceCollection RegisterExceptionHandlers(this IServiceCollection services)
     {
         services.AddSingleton<BusinessExceptionHandler>();
@@ -100,7 +115,10 @@ public static class ServiceCollectionExtensions
         
         return services;
     }
-
+    
+    /// <summary>
+    /// Register distributed cache services (redis)
+    /// </summary>
     public static IServiceCollection RegisterDistributedCache(this IServiceCollection services, IConfiguration configuration)
     {
         var redisSettings = configuration.GetSection(nameof(RedisSettings)).Get<RedisSettings>()!;

@@ -9,8 +9,13 @@ namespace BillingManager.Application.Commands.Products.Update;
 public sealed class UpdateProductCommand : IRequest<ProductCommandResponse>
 {
     [JsonPropertyName("id")]
+    [JsonIgnore]
     public Guid Id { get; set; }
     
+    /// <summary>
+    /// Product name
+    /// </summary>
+    /// <example>Notebook</example>
     [JsonPropertyName("name")]
     public string Name { get; set; }
 }

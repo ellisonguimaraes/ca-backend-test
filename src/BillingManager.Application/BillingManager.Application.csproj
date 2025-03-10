@@ -19,4 +19,9 @@
     <ProjectReference Include="..\BillingManager.Services\BillingManager.Services.csproj" />
   </ItemGroup>
 
+  <!-- SWAGGER XML COMMENTS -->
+  <PropertyGroup>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
 </Project>

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace BillingManager.Application.Behaviors;
 
 /// <summary>
-/// Performance behavior
+/// Performance behavior: Calculates the execution time of the handler and logs it if the time exceeds the allowed limit.
 /// </summary>
 public class PerformanceBehavior<TRequest, TResponse>(ILogger<PerformanceBehavior<TRequest, TResponse>> logger, PerformanceConfiguration configuration) : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest<TResponse>
 {

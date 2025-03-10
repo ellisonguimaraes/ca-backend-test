@@ -43,7 +43,7 @@ public class ProductController(IMediator mediator) : ControllerBase
 
         Response.Headers.Append(X_PAGINATION, JsonSerializer.Serialize(metadata));
         
-        return Ok(new HttpResponse { Data = response });
+        return Ok(new HttpResponse { Data = response.Items });
     }
 
     [HttpPost]

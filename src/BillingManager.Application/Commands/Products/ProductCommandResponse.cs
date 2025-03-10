@@ -7,6 +7,10 @@ namespace BillingManager.Application.Commands.Products;
 /// </summary>
 public class ProductCommandResponse : BaseCommandResponse
 {
+    /// <summary>
+    /// Product name
+    /// </summary>
+    /// <example>Notebook</example>
     [JsonPropertyName("name")]
     public string Name { get; set; }
 }

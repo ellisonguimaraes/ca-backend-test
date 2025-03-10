@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillingManager.API</name>
+    </assembly>
+    <members>
+        <member name="T:BillingManager.API.Controllers.CustomerController">
+            <summary>
+            Controller responsible for managing customers
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.CustomerController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller responsible for managing customers
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.CustomerController.GetByIdAsync(System.Guid)">
+            <summary>Get customer by identification (Guid)</summary>
+            <remarks>
+            Request example:
+            
+                GET /api/customer/{id:guid}
+                
+            </remarks>
+            <param name="id">Customer identifier (Guid)</param>
+            <returns>Customer</returns>
+            <response code="200">Returns customer successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.CustomerController.GetPaginateAsync(BillingManager.Application.Queries.Customers.GetAll.GetAllCustomerQuery)">
+            <summary>Get pagination list of customer</summary>
+            <remarks>
+            This request return response header with pagination infos:
+            
+                X-Pagination: {"total_count":5,"page_size":3,"page_number":2,"total_pages":2,"has_next":false,"has_previous":true} 
+                
+            </remarks>
+            <param name="query">Page number and page size</param>
+            <returns>Paginated customers (with header X-Pagination with page info)</returns>
+            <response code="200">Returns pagination customers successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.CustomerController.CreateAsync(BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand)">
+            <summary>Create new customer</summary>
+            <remarks>
+            Request example:
+            
+                POST /api/customer
+                {
+                    "name": "Antônio",
+                    "email": "antonio@gmail.com",
+                    "address": "rua F"
+                }
+                
+            </remarks>
+            <param name="command">Customer name, email and address</param>
+            <returns>Customer with identifier (Guid)</returns>
+            <response code="200">Customer created successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.CustomerController.UpdateAsync(System.Guid,BillingManager.Application.Commands.Customers.Update.UpdateCustomerCommand)">
+            <summary>Update customer</summary>
+            <remarks>
+            Request example:
+            
+                PUT /api/customer/{id:guid}
+                {
+                    "name": "Antônio",
+                    "email": "antonio@gmail.com",
+                    "address": "rua F"
+                }
+                
+            </remarks>
+            <param name="command">Customer name, email and address</param>
+            <param name="id">Customer identifier (Guid)</param>
+            <returns>Customer updated</returns>
+            <response code="200">Customer updated successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="T:BillingManager.API.Controllers.ProductController">
+            <summary>
+            Controller responsible for managing products
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.ProductController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller responsible for managing products
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.ProductController.GetByIdAsync(System.Guid)">
+            <summary>Get product by identification (Guid)</summary>
+            <remarks>
+            Request example:
+            
+                GET /api/product/{id:guid}
+                
+            </remarks>
+            <param name="id">Product identifier (Guid)</param>
+            <returns>Product</returns>
+            <response code="200">Returns product successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.ProductController.GetPaginateAsync(BillingManager.Application.Queries.Products.GetAll.GetAllProductQuery)">
+            <summary>Get pagination list of product</summary>
+            /// <remarks>
+            This request return response header with pagination infos:
+            
+                X-Pagination: {"total_count":5,"page_size":3,"page_number":2,"total_pages":2,"has_next":false,"has_previous":true} 
+                
+            </remarks>
+            <param name="query">Page number and page size</param>
+            <returns>Paginated products (with header X-Pagination with page info)</returns>
+            <response code="200">Returns pagination products successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.ProductController.CreateAsync(BillingManager.Application.Commands.Products.Create.CreateProductCommand)">
+            <summary>Create new product</summary>
+            <remarks>
+            Request example:
+            
+                POST /api/product
+                {
+                    "name": "Notebook"
+                }
+                
+            </remarks>
+            <param name="command">Product name, email and address</param>
+            <returns>Product with identifier (Guid)</returns>
+            <response code="200">Product created successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="M:BillingManager.API.Controllers.ProductController.UpdateAsync(System.Guid,BillingManager.Application.Commands.Products.Update.UpdateProductCommand)">
+            <summary>Update product</summary>
+            <remarks>
+            Request example:
+            
+                PUT /api/product/{id:guid}
+                {
+                    "name": "Mouse"
+                }
+                
+            </remarks>
+            <param name="command">Product name, email and address</param>
+            <param name="id">Product identifier (Guid)</param>
+            <returns>Product updated</returns>
+            <response code="200">Product updated successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
+        <member name="T:BillingManager.API.Middlewares.ExceptionMiddleware">
+            <summary>
+            Middleware that handles all request exceptions
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Middlewares.ExceptionMiddleware.#ctor(Microsoft.AspNetCore.Http.RequestDelegate,System.Collections.Generic.IDictionary{System.Type,BillingManager.Application.ExceptionHandlers.IExceptionHandler},Microsoft.Extensions.Logging.ILogger{BillingManager.API.Middlewares.ExceptionMiddleware})">
+            <summary>
+            Middleware that handles all request exceptions
+            </summary>
+        </member>
+    </members>
+</doc>

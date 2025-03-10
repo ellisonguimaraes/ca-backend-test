@@ -5,6 +5,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BillingManager.Application.Notifications.UpdateEntityInCache;
 
+/// <summary>
+/// Handler to update entity data cache in DistributedCache.
+/// </summary>
+/// <param name="cache">Cache service</param>
+/// <param name="configuration">Configuration file (appsettings)</param>
 public class UpdateEntityInCacheNotificationHandler<T>(ICachingService cache, IConfiguration configuration) : INotificationHandler<UpdateEntityInCacheNotification<T>> where T : BaseEntity
 {
     #region Constants

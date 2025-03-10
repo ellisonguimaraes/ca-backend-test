@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BillingManager.Domain</name>
+    </assembly>
+    <members>
+        <member name="T:BillingManager.Domain.Configurations.PerfomanceConfiguration.Handler">
+            <summary>
+            Only handle performance information (appsettings)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Configurations.PerfomanceConfiguration.PerformanceConfiguration">
+            <summary>
+            Performance handlers infos (appsettings)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Configurations.RedisSettings">
+            <summary>
+            Redis Settings (appsettings values)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Exceptions.BusinessException">
+            <summary>
+            Exception for business rules
+            </summary>
+        </member>
+        <member name="M:BillingManager.Domain.Exceptions.BusinessException.#ctor(System.String,System.String)">
+            <summary>
+            Exception for business rules
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Utils.ErrorResponse">
+            <summary>
+            Response error
+            </summary>
+        </member>
+        <member name="M:BillingManager.Domain.Utils.ErrorResponse.#ctor(System.String,System.String)">
+            <summary>
+            Response error
+            </summary>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.ErrorResponse.Code">
+            <summary>
+            Error code
+            </summary>
+            <example>ERR001</example>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.ErrorResponse.Message">
+            <summary>
+            Error message
+            </summary>
+            <example>Error occurred message</example>
+        </member>
+        <member name="T:BillingManager.Domain.Utils.HttpResponse`1">
+            <summary>
+            Generic http response
+            </summary>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.HttpResponse`1.TraceId">
+            <summary>
+            Trace identifier
+            </summary>
+            <example>00-4e1e307d7eb6acc951186c77902f3cc6-87506b389e488a5c-00</example>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.HttpResponse`1.Data">
+            <summary>
+            Response data
+            </summary>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.HttpResponse`1.Errors">
+            <summary>
+            Error code and error message
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Utils.HttpResponse">
+            <summary>
+            Generic http response
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Utils.PagedList`1">
+            <summary>
+            Paged list type
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Utils.PaginationParameters">
+            <summary>
+            Pagination parameters model
+            </summary>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.PaginationParameters.PageNumber">
+            <summary>
+            Page number
+            </summary>
+            <example>2</example>
+        </member>
+        <member name="P:BillingManager.Domain.Utils.PaginationParameters.PageSize">
+            <summary>
+            Page size
+            </summary>
+            <example>3</example>
+        </member>
+    </members>
+</doc>

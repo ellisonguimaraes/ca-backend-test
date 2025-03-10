@@ -7,6 +7,10 @@ namespace BillingManager.Application.Queries.Products;
 /// </summary>
 public class ProductQueryResponse : BaseQueryResponse
 {
+    /// <summary>
+    /// Product name
+    /// </summary>
+    /// <example>Notebook</example>
     [JsonPropertyName("name")]
     public string Name { get; set; }
 }

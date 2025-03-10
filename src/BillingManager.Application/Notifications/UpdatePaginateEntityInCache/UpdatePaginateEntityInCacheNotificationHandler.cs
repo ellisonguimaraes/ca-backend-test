@@ -6,6 +6,11 @@ using Microsoft.Extensions.Configuration;
 
 namespace BillingManager.Application.Notifications.UpdatePaginateEntityInCache;
 
+/// <summary>
+/// Handler to update paginated entity data cache in DistributedCache.
+/// </summary>
+/// <param name="cache">Cache service</param>
+/// <param name="configuration">Configuration file (appsettings)</param>
 public class UpdatePaginateEntityInCacheNotificationHandler<TEntity>(ICachingService cache, IConfiguration configuration)
     : INotificationHandler<UpdatePaginateEntityInCacheNotification<PagedList<TEntity>, TEntity>> 
     where TEntity : BaseEntity

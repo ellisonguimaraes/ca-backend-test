@@ -19,6 +19,11 @@
             Register mapper objects
             </summary>
         </member>
+        <member name="M:BillingManager.Infra.CrossCutting.IoC.ServiceCollectionExtensions.RegisterHttpClients(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Register Http Clients
+            </summary>
+        </member>
         <member name="M:BillingManager.Infra.CrossCutting.IoC.ServiceCollectionExtensions.RegisterDbContextAndRepositories(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
             Configure and register db context, and register repositories

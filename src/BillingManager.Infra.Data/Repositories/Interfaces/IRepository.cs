@@ -15,7 +15,7 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
     /// </summary>
     /// <param name="id">Guid identifier</param>
     /// <returns>Entity or null</returns>
-    Task<TEntity> GetByIdAsync(Guid id);
+    Task<TEntity?> GetByIdAsync(Guid id);
 
     /// <summary>
     /// Get paged entity list

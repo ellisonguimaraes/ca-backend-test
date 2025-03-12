@@ -30,4 +30,10 @@
     <data name="NOT_MAPPED_EXCEPTION_ERROR_MESSAGE" xml:space="preserve">
         <value>An unexpected error occurred</value>
     </data>
+    <data name="EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_CODE" xml:space="preserve">
+        <value>AP001</value>
+    </data>
+    <data name="EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_MESSAGE" xml:space="preserve">
+        <value>The external request to [{0}] {1} failed with status code {2}</value>
+    </data>
 </root>

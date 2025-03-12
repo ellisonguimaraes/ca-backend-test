@@ -4,6 +4,29 @@
         <name>BillingManager.API</name>
     </assembly>
     <members>
+        <member name="T:BillingManager.API.Controllers.BillingController">
+            <summary>
+            Controller responsible for managing billing
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.BillingController.#ctor(MediatR.IMediator)">
+            <summary>
+            Controller responsible for managing billing
+            </summary>
+        </member>
+        <member name="M:BillingManager.API.Controllers.BillingController.ImportBillingAsync">
+            <summary>Import billing/billinglines from external request</summary>
+            <remarks>
+            Request example:
+            
+                POST /api/billing/import
+                
+            </remarks>
+            <returns>Logging successful or failed attempts</returns>
+            <response code="200">Try import billing successfully</response>
+            <response code="400">Any mapped error occurred</response>
+            <response code="500">Any unmapped error occurred</response>
+        </member>
         <member name="T:BillingManager.API.Controllers.CustomerController">
             <summary>
             Controller responsible for managing customers

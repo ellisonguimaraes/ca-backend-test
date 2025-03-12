@@ -4,6 +4,17 @@
         <name>BillingManager.Services</name>
     </assembly>
     <members>
+        <member name="T:BillingManager.Services.HttpClients.IBillingHttpClient">
+            <summary>
+            Http client to Billing API
+            </summary>
+        </member>
+        <member name="M:BillingManager.Services.HttpClients.IBillingHttpClient.GetAllBillingsAsync">
+            <summary>
+            Get all billings in API
+            </summary>
+            <returns>Billing list</returns>
+        </member>
         <member name="T:BillingManager.Services.Interfaces.ICachingService">
             <summary>
             Distributed cache service

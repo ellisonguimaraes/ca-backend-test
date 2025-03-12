@@ -14,9 +14,8 @@ public class Repository<TEntity>(ApplicationDbContext context) : IRepository<TEn
     
     protected readonly DbSet<TEntity> DbSet = context.Set<TEntity>();
 
-    public virtual async Task<TEntity> GetByIdAsync(Guid id)
-        => await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id))
-           ?? throw new BusinessException(ErrorsResource.NOT_FOUND_ERROR_CODE, string.Format(ErrorsResource.NOT_FOUND_ERROR_MESSAGE, typeof(TEntity).Name));
+    public virtual async Task<TEntity?> GetByIdAsync(Guid id)
+        => await DbSet.SingleOrDefaultAsync(e => e.Id.Equals(id));
 
     public virtual Task<PagedList<TEntity>> GetPaginateAsync(int pageNumber, int pageSize)
         => Task.FromResult(new PagedList<TEntity>(

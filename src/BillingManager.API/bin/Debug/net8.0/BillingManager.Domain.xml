@@ -4,6 +4,11 @@
         <name>BillingManager.Domain</name>
     </assembly>
     <members>
+        <member name="T:BillingManager.Domain.Configurations.BillingApiSettings">
+            <summary>
+            Billing api configuration (appsettings)
+            </summary>
+        </member>
         <member name="T:BillingManager.Domain.Configurations.PerfomanceConfiguration.Handler">
             <summary>
             Only handle performance information (appsettings)
@@ -17,6 +22,16 @@
         <member name="T:BillingManager.Domain.Configurations.RedisSettings">
             <summary>
             Redis Settings (appsettings values)
+            </summary>
+        </member>
+        <member name="T:BillingManager.Domain.Exceptions.ApiException">
+            <summary>
+            Exception for external API errors
+            </summary>
+        </member>
+        <member name="M:BillingManager.Domain.Exceptions.ApiException.#ctor(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Exception for external API errors
             </summary>
         </member>
         <member name="T:BillingManager.Domain.Exceptions.BusinessException">

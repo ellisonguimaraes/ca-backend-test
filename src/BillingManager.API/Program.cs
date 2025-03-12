@@ -16,7 +16,8 @@ builder.Services
     .RegisterDbContextAndRepositories(builder.Configuration)
     .RegisterConfigurationFiles(builder.Configuration)
     .RegisterDistributedCache(builder.Configuration)
-    .RegisterExceptionHandlers();
+    .RegisterExceptionHandlers()
+    .RegisterHttpClients(builder.Configuration);
 
 var app = builder.Build();
 

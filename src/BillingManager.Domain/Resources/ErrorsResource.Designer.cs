@@ -21,7 +21,7 @@ namespace BillingManager.Domain.Resources {
         private static System.Globalization.CultureInfo resourceCulture;
         
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public ErrorsResource() {
+        internal ErrorsResource() {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -66,6 +66,18 @@ namespace BillingManager.Domain.Resources {
         public static string NOT_MAPPED_EXCEPTION_ERROR_MESSAGE {
             get {
                 return ResourceManager.GetString("NOT_MAPPED_EXCEPTION_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_CODE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_CODE", resourceCulture);
+            }
+        }
+        
+        public static string EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_MESSAGE {
+            get {
+                return ResourceManager.GetString("EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_MESSAGE", resourceCulture);
             }
         }
     }

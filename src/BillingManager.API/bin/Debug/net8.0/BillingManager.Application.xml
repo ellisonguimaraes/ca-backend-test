@@ -42,6 +42,12 @@
             Create customer command
             </summary>
         </member>
+        <member name="P:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand.Id">
+            <summary>
+            Customer identifier
+            </summary>
+            <example>582ca72e-cd4c-4071-bbcc-29e6bae4eff6</example>
+        </member>
         <member name="P:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand.Name">
             <summary>
             Customer name
@@ -131,6 +137,12 @@
             Create product command
             </summary>
         </member>
+        <member name="P:BillingManager.Application.Commands.Products.Create.CreateProductCommand.Id">
+            <summary>
+            Product identifier
+            </summary>
+            <example>582ca72e-cd4c-4071-bbcc-29e6bae4eff6</example>
+        </member>
         <member name="P:BillingManager.Application.Commands.Products.Create.CreateProductCommand.Name">
             <summary>
             Product name
@@ -177,6 +189,16 @@
         <member name="M:BillingManager.Application.Commands.Products.Update.UpdateProductCommandHandler.#ctor(BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},AutoMapper.IMapper,MediatR.IMediator)">
             <summary>
             Update product command handler
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.ExceptionHandlers.ApiExceptionHandler">
+            <summary>
+            Api Exception Handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.ExceptionHandlers.ApiExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.ExceptionHandlers.ApiExceptionHandler})">
+            <summary>
+            Api Exception Handler
             </summary>
         </member>
         <member name="T:BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler">
@@ -335,6 +357,14 @@
             Get customer by id handler
             </summary>
         </member>
+        <member name="M:BillingManager.Application.Queries.Customers.GetById.GetCustomerByIdQueryHandler.TryGetCachedCustomer(System.Guid,BillingManager.Domain.Entities.Customer@)">
+            <summary>
+            Try to get customer in Distributed Cache
+            </summary>
+            <param name="id">Customer identifier</param>
+            <param name="customer">Customer</param>
+            <returns>Get or not boolean</returns>
+        </member>
         <member name="T:BillingManager.Application.Queries.Products.GetAll.GetAllProductQuery">
             <summary>
             Get all products query (with pagination)
@@ -364,6 +394,14 @@
             <summary>
             Get product by id handler
             </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Products.GetById.GetProductByIdQueryHandler.TryGetCachedProduct(System.Guid,BillingManager.Domain.Entities.Product@)">
+            <summary>
+            Try to get product in Distributed Cache
+            </summary>
+            <param name="id">Product identifier</param>
+            <param name="product">Product</param>
+            <returns>Get or not boolean</returns>
         </member>
         <member name="T:BillingManager.Application.Queries.Products.ProductQueryResponse">
             <summary>

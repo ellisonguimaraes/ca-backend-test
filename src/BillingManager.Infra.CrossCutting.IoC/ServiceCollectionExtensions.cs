@@ -1,4 +1,6 @@
+using System.Diagnostics;
 using BillingManager.Application.Behaviors;
+using BillingManager.Application.Commands.Billing.ImportBilling;
 using BillingManager.Application.Commands.Customers.Create;
 using BillingManager.Application.Commands.Customers.Update;
 using BillingManager.Application.Commands.Products.Create;
@@ -21,11 +23,14 @@ using BillingManager.Infra.Data;
 using BillingManager.Infra.Data.Repositories;
 using BillingManager.Infra.Data.Repositories.Interfaces;
 using BillingManager.Services;
+using BillingManager.Services.HttpClients;
 using BillingManager.Services.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Polly;
 
 namespace BillingManager.Infra.CrossCutting.IoC;
 
@@ -48,6 +53,7 @@ public static class ServiceCollectionExtensions
         services.AddMediatR(typeof(GetCustomerByIdQueryHandler).Assembly);
         services.AddMediatR(typeof(GetAllProductQueryHandler).Assembly);
         services.AddMediatR(typeof(GetProductByIdQueryHandler).Assembly);
+        services.AddMediatR(typeof(ImportBillingCommandHandler).Assembly);
 
         services.AddTransient<INotificationHandler<UpdateEntityInCacheNotification<Customer>>, UpdateEntityInCacheNotificationHandler<Customer>>();
         services.AddTransient<INotificationHandler<UpdateEntityInCacheNotification<Product>>, UpdateEntityInCacheNotificationHandler<Product>>();
@@ -70,6 +76,44 @@ public static class ServiceCollectionExtensions
     {
         services.AddAutoMapper(typeof(CustomerProfile));
         services.AddAutoMapper(typeof(ProductProfile));
+        services.AddAutoMapper(typeof(BillingProfile));
+        services.AddAutoMapper(typeof(BillingLineProfile));
+        
+        return services;
+    }
+    
+    /// <summary>
+    /// Register Http Clients
+    /// </summary>
+    public static IServiceCollection RegisterHttpClients(this IServiceCollection services, IConfiguration configuration)
+    {
+        var billingApiSettings = configuration.GetSection(nameof(BillingApiSettings)).Get<BillingApiSettings>()!;
+        
+        services.AddHttpClient<IBillingHttpClient, BillingHttpClient>().ConfigureHttpClient(client => 
+        {
+            client.BaseAddress = new Uri(billingApiSettings.BaseUrl);
+            client.Timeout = TimeSpan.FromSeconds(billingApiSettings.TimeoutInSeconds);
+        }).AddPolicyHandler((provider, _) =>
+            {
+                var logger = provider.GetRequiredService<ILogger<BillingHttpClient>>();
+                
+                return Policy
+                    .Handle<HttpRequestException>()
+                    .OrResult<HttpResponseMessage>(r => !r.IsSuccessStatusCode)
+                    .WaitAndRetryAsync(billingApiSettings.Retry, retryAttempt => TimeSpan.FromSeconds(Math.Pow(billingApiSettings.RetryAttemptPowBase, retryAttempt)), 
+                        (response, timeSpan, retryCount, context) =>
+                        {
+                            logger.LogWarning("Error in retry number {RetryCount} on {Endpoint}. Returned status code {StatusCode}. Next retry in {NextRetrySeconds} seconds. TraceId: {TraceId}. {@HttpResponseMessages}", 
+                                retryCount, 
+                                $"[{response.Result.RequestMessage?.Method.ToString().ToUpper()}] {response.Result.RequestMessage?.RequestUri}", 
+                                (int)response.Result.StatusCode,
+                                timeSpan.TotalSeconds,
+                                Activity.Current?.Id,
+                                response.Result);
+                        });
+            });
+
+        services.AddSingleton(billingApiSettings);
         
         return services;
     }
@@ -106,11 +150,13 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection RegisterExceptionHandlers(this IServiceCollection services)
     {
         services.AddSingleton<BusinessExceptionHandler>();
-
+        services.AddSingleton<ApiExceptionHandler>();
+        
         services.AddSingleton<IDictionary<Type, IExceptionHandler>>(provider => 
             new Dictionary<Type, IExceptionHandler>
             {
-                { typeof(BusinessException), provider.GetRequiredService<BusinessExceptionHandler>() }
+                { typeof(BusinessException), provider.GetRequiredService<BusinessExceptionHandler>() },
+                { typeof(ApiException), provider.GetRequiredService<ApiExceptionHandler>() }
             });
         
         return services;

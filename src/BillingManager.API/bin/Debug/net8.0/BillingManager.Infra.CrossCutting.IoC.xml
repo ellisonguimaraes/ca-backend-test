@@ -44,6 +44,11 @@
             Register distributed cache services (redis)
             </summary>
         </member>
+        <member name="M:BillingManager.Infra.CrossCutting.IoC.ServiceCollectionExtensions.AddApiVersioningConfiguration(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Register versioning services
+            </summary>
+        </member>
         <member name="T:BillingManager.Infra.CrossCutting.IoC.SwaggerConfigurationExtensions">
             <summary>
             Swagger configuration extensions
@@ -57,6 +62,11 @@
         <member name="M:BillingManager.Infra.CrossCutting.IoC.SwaggerConfigurationExtensions.ConfigureSwagger(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
             <summary>
             Configure Swagger in application builder
+            </summary>
+        </member>
+        <member name="T:BillingManager.Infra.CrossCutting.IoC.Versioning.CustomVersioningErrorResponseProvider">
+            <summary>
+            Custom versioning treatment when version not exists
             </summary>
         </member>
     </members>

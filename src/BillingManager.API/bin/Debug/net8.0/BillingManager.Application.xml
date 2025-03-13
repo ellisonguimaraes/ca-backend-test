@@ -37,6 +37,37 @@
             </summary>
             <example>2025-03-10T15:19:12.885Z</example>
         </member>
+        <member name="T:BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandHandler">
+            <summary>
+            Command to import billing from external request
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandHandler.#ctor(BillingManager.Services.HttpClients.IBillingHttpClient,BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Customer},BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Product},BillingManager.Infra.Data.Repositories.Interfaces.IRepository{BillingManager.Domain.Entities.Billing},AutoMapper.IMapper)">
+            <summary>
+            Command to import billing from external request
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandHandler.CheckExistsCustomer(System.Guid,BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandResponse)">
+            <summary>
+            Check if customer exist
+            </summary>
+            <param name="customerId">Customer identifier</param>
+            <param name="importBillingCommandResponse">Response model</param>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandHandler.CheckExistsProducts(System.Collections.Generic.IList{System.Guid},BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandResponse)">
+            <summary>
+            Check if products exists
+            </summary>
+            <param name="products">Product identifiers</param>
+            <param name="importBillingCommandResponse">Response model</param>
+        </member>
+        <member name="M:BillingManager.Application.Commands.Billing.ImportBilling.ImportBillingCommandHandler.ClearInvalidAndDuplicatedBilling(System.Collections.Generic.IList{BillingManager.Domain.HttpClient.BillingApiResponse})">
+            <summary>
+            Clear invalid billing in API
+            </summary>
+            <param name="billings">Billing API response</param>
+            <returns>Cleaned billings</returns>
+        </member>
         <member name="T:BillingManager.Application.Commands.Customers.Create.CreateCustomerCommand">
             <summary>
             Create customer command
@@ -209,6 +240,16 @@
         <member name="M:BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.ExceptionHandlers.BusinessExceptionHandler})">
             <summary>
             Business exception handle
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.ExceptionHandlers.CustomUnsupportedApiVersionExceptionHandler">
+            <summary>
+            Unsupported API version exception handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.ExceptionHandlers.CustomUnsupportedApiVersionExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.ExceptionHandlers.CustomUnsupportedApiVersionExceptionHandler})">
+            <summary>
+            Unsupported API version exception handler
             </summary>
         </member>
         <member name="T:BillingManager.Application.ExceptionHandlers.IExceptionHandler">

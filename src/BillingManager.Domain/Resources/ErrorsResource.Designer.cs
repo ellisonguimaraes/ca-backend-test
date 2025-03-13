@@ -80,5 +80,17 @@ namespace BillingManager.Domain.Resources {
                 return ResourceManager.GetString("EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_MESSAGE", resourceCulture);
             }
         }
+        
+        public static string UNSUPPORTED_API_VERSION_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("UNSUPPORTED_API_VERSION_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string UNSUPPORTED_API_VERSION_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("UNSUPPORTED_API_VERSION_ERROR_MESSAGE", resourceCulture);
+            }
+        }
     }
 }

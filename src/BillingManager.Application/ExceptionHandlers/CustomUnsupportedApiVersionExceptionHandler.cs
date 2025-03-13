@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using System.Text.Json;
 using BillingManager.Domain.Exceptions;
+using BillingManager.Domain.Resources;
 using BillingManager.Domain.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -9,22 +10,22 @@ using HttpResponse = BillingManager.Domain.Utils.HttpResponse;
 namespace BillingManager.Application.ExceptionHandlers;
 
 /// <summary>
-/// Business exception handle
+/// Unsupported API version exception handler
 /// </summary>
-public class BusinessExceptionHandler(ILogger<BusinessExceptionHandler> logger) : IExceptionHandler
+public class CustomUnsupportedApiVersionExceptionHandler(ILogger<CustomUnsupportedApiVersionExceptionHandler> logger) : IExceptionHandler
 {
     public async Task HandleAsync(HttpContext context, Exception exception)
     {
-        var businessException = (exception as BusinessException)!;
+        var apiVersionException = (exception as CustomUnsupportedApiVersionException)!;
         
-        var error = new ErrorResponse(businessException.ErrorCode, businessException.Message);
+        var error = new ErrorResponse(ErrorsResource.UNSUPPORTED_API_VERSION_ERROR_CODE, ErrorsResource.UNSUPPORTED_API_VERSION_ERROR_MESSAGE);
                 
         var response = new HttpResponse
         {
             Errors = [ error ]
         };
                 
-        logger.LogError(businessException, 
+        logger.LogWarning(apiVersionException, 
             "[{ErrorCode}] {ErrorMessage}, Path: {Method} {Path}, TraceId: {TraceId}", 
             error.Code, 
             error.Message,

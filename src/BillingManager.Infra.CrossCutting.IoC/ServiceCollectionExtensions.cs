@@ -14,6 +14,7 @@ using BillingManager.Application.Queries.Customers.GetAll;
 using BillingManager.Application.Queries.Customers.GetById;
 using BillingManager.Application.Queries.Products.GetAll;
 using BillingManager.Application.Queries.Products.GetById;
+using BillingManager.Application.Validators;
 using BillingManager.Domain.Configurations;
 using BillingManager.Domain.Configurations.PerfomanceConfiguration;
 using BillingManager.Domain.Entities;
@@ -26,6 +27,7 @@ using BillingManager.Infra.Data.Repositories.Interfaces;
 using BillingManager.Services;
 using BillingManager.Services.HttpClients;
 using BillingManager.Services.Interfaces;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -78,6 +80,21 @@ public static class ServiceCollectionExtensions
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+        
+        return services;
+    }
+    
+    /// <summary>
+    /// Register validators
+    /// </summary>
+    public static IServiceCollection RegisterValidators(this IServiceCollection services)
+    {
+        services.AddScoped<IValidator<CreateCustomerCommand>, CreateCustomerCommandValidator>();
+        services.AddScoped<IValidator<CreateProductCommand>, CreateProductCommandValidator>();
+        services.AddScoped<IValidator<UpdateCustomerCommand>, UpdateCustomerCommandValidator>();
+        services.AddScoped<IValidator<UpdateProductCommand>, UpdateProductCommandValidator>();
+        services.AddScoped<IValidator<GetAllCustomerQuery>, GetAllCustomerQueryValidator>();
+        services.AddScoped<IValidator<GetAllProductQuery>, GetAllProductQueryValidator>();
         
         return services;
     }
@@ -165,13 +182,15 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<BusinessExceptionHandler>();
         services.AddSingleton<ApiExceptionHandler>();
         services.AddSingleton<CustomUnsupportedApiVersionExceptionHandler>();
+        services.AddSingleton<ValidationExceptionHandler>();
         
         services.AddSingleton<IDictionary<Type, IExceptionHandler>>(provider => 
             new Dictionary<Type, IExceptionHandler>
             {
                 { typeof(BusinessException), provider.GetRequiredService<BusinessExceptionHandler>() },
                 { typeof(ApiException), provider.GetRequiredService<ApiExceptionHandler>() },
-                { typeof(CustomUnsupportedApiVersionException), provider.GetRequiredService<CustomUnsupportedApiVersionExceptionHandler>() }
+                { typeof(CustomUnsupportedApiVersionException), provider.GetRequiredService<CustomUnsupportedApiVersionExceptionHandler>() },
+                { typeof(ValidationException), provider.GetRequiredService<ValidationExceptionHandler>() }
             });
         
         return services;

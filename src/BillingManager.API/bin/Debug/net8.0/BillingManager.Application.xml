@@ -14,6 +14,16 @@
             Performance behavior: Calculates the execution time of the handler and logs it if the time exceeds the allowed limit.
             </summary>
         </member>
+        <member name="T:BillingManager.Application.Behaviors.ValidationBehavior`2">
+            <summary>
+            Validation Behavior
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.Behaviors.ValidationBehavior`2.#ctor(System.Collections.Generic.IEnumerable{FluentValidation.IValidator{`0}})">
+            <summary>
+            Validation Behavior
+            </summary>
+        </member>
         <member name="T:BillingManager.Application.Commands.BaseCommandResponse">
             <summary>
             Base entity command response
@@ -257,6 +267,16 @@
             Exception handle interface
             </summary>
         </member>
+        <member name="T:BillingManager.Application.ExceptionHandlers.ValidationExceptionHandler">
+            <summary>
+            Validation error exception handler
+            </summary>
+        </member>
+        <member name="M:BillingManager.Application.ExceptionHandlers.ValidationExceptionHandler.#ctor(Microsoft.Extensions.Logging.ILogger{BillingManager.Application.ExceptionHandlers.ValidationExceptionHandler})">
+            <summary>
+            Validation error exception handler
+            </summary>
+        </member>
         <member name="T:BillingManager.Application.Notifications.DeleteAllPaginatedEntityInCache.DeleteAllPaginatedEntityInCacheNotification`1">
             <summary>
             Notification to delete paginated data cache in DistributedCache.
@@ -454,6 +474,26 @@
             Product name
             </summary>
             <example>Notebook</example>
+        </member>
+        <member name="T:BillingManager.Application.Validators.CreateCustomerCommandValidator">
+            <summary>
+            CreateCustomerCommand validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.CreateProductCommandValidator">
+            <summary>
+            CreateProductCommand validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.UpdateCustomerCommandValidator">
+            <summary>
+            UpdateCustomerCommand validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.UpdateProductCommandValidator">
+            <summary>
+            UpdateProductCommand validator
+            </summary>
         </member>
     </members>
 </doc>

@@ -15,6 +15,7 @@ builder.Services.AddControllers();
 builder.Logging.LoggerConfiguration(builder.Configuration);
 
 builder.Services
+    .RegisterValidators()
     .ConfigureSwagger(builder.Configuration)
     .RegisterHandlersAndBehaviors()
     .RegisterMappers()

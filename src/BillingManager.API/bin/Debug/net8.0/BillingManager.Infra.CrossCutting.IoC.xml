@@ -14,6 +14,11 @@
             Register command and queries handlers, notifications and behaviors
             </summary>
         </member>
+        <member name="M:BillingManager.Infra.CrossCutting.IoC.ServiceCollectionExtensions.RegisterValidators(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Register validators
+            </summary>
+        </member>
         <member name="M:BillingManager.Infra.CrossCutting.IoC.ServiceCollectionExtensions.RegisterMappers(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             Register mapper objects

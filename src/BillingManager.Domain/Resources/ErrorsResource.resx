@@ -42,4 +42,52 @@
     <data name="UNSUPPORTED_API_VERSION_ERROR_MESSAGE" xml:space="preserve">
         <value>The specified version is not supported for this route.</value>
     </data>
+    <data name="VALIDATION_IS_INVALID_ERROR_MESSAGE" xml:space="preserve">
+        <value>{PropertyName} is invalid</value>
+    </data>
+    <data name="VALIDATION_IS_INVALID_ERROR_CODE" xml:space="preserve">
+        <value>VA001</value>
+    </data>
+    <data name="VALIDATION_IS_LIMITED_TO_ERROR_MESSAGE" xml:space="preserve">
+        <value>{0} is limited to {1}</value>
+    </data>
+    <data name="VALIDATION_IS_LIMITED_TO_ERROR_CODE" xml:space="preserve">
+        <value>VA002</value>
+    </data>
+    <data name="VALIDATION_NOT_EMPTY_ERROR_MESSAGE" xml:space="preserve">
+        <value>{PropertyName} cannot be empty</value>
+    </data>
+    <data name="VALIDATION_NOT_EMPTY_ERROR_CODE" xml:space="preserve">
+        <value>VA003</value>
+    </data>
+    <data name="VALIDATION_NOT_NULL_ERROR_MESSAGE" xml:space="preserve">
+        <value>{PropertyName} cannot be null</value>
+    </data>
+    <data name="VALIDATION_NOT_NULL_ERROR_CODE" xml:space="preserve">
+        <value>VA004</value>
+    </data>
+    <data name="VALIDATION_ERROR_MESSAGE" xml:space="preserve">
+        <value>Validation error</value>
+    </data>
+    <data name="VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_MESSAGE" xml:space="preserve">
+        <value>{PropertyName} must be greater than {ComparisonValue}</value>
+    </data>
+    <data name="VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_CODE" xml:space="preserve">
+        <value>VA005</value>
+    </data>
+    <data name="VALIDATION_LESS_THEN_OR_EQUAL_ERROR_CODE" xml:space="preserve">
+        <value>VA006</value>
+    </data>
+    <data name="VALIDATION_LESS_THEN_OR_EQUAL_ERROR_MESSAGE" xml:space="preserve">
+        <value>{PropertyName} must be less than {ComparisonValue}</value>
+    </data>
+    <data name="LIMIT_PAGE_SIZE" xml:space="preserve">
+        <value>50</value>
+    </data>
+    <data name="MIN_LIMIT_PAGE_SIZE" xml:space="preserve">
+        <value>1</value>
+    </data>
+    <data name="MIN_LIMIT_PAGE_NUMBER" xml:space="preserve">
+        <value>1</value>
+    </data>
 </root>

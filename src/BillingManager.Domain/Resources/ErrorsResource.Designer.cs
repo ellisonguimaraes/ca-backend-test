@@ -92,5 +92,101 @@ namespace BillingManager.Domain.Resources {
                 return ResourceManager.GetString("UNSUPPORTED_API_VERSION_ERROR_MESSAGE", resourceCulture);
             }
         }
+        
+        public static string VALIDATION_IS_INVALID_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_IS_INVALID_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_IS_INVALID_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_IS_INVALID_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_IS_LIMITED_TO_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_IS_LIMITED_TO_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_IS_LIMITED_TO_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_IS_LIMITED_TO_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_NOT_EMPTY_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_NOT_EMPTY_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_NOT_EMPTY_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_NOT_EMPTY_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_NOT_NULL_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_NOT_NULL_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_NOT_NULL_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_NOT_NULL_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_GREATER_THEN_OR_EQUAL_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_LESS_THEN_OR_EQUAL_ERROR_CODE {
+            get {
+                return ResourceManager.GetString("VALIDATION_LESS_THEN_OR_EQUAL_ERROR_CODE", resourceCulture);
+            }
+        }
+        
+        public static string VALIDATION_LESS_THEN_OR_EQUAL_ERROR_MESSAGE {
+            get {
+                return ResourceManager.GetString("VALIDATION_LESS_THEN_OR_EQUAL_ERROR_MESSAGE", resourceCulture);
+            }
+        }
+        
+        public static string LIMIT_PAGE_SIZE {
+            get {
+                return ResourceManager.GetString("LIMIT_PAGE_SIZE", resourceCulture);
+            }
+        }
+        
+        public static string MIN_LIMIT_PAGE_SIZE {
+            get {
+                return ResourceManager.GetString("MIN_LIMIT_PAGE_SIZE", resourceCulture);
+            }
+        }
+        
+        public static string MIN_LIMIT_PAGE_NUMBER {
+            get {
+                return ResourceManager.GetString("MIN_LIMIT_PAGE_NUMBER", resourceCulture);
+            }
+        }
     }
 }

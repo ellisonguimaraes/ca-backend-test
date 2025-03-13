@@ -15,7 +15,8 @@ namespace BillingManager.API.Controllers;
 /// Controller responsible for managing customers
 /// </summary>
 [ApiController]
-[Route("api/[controller]")]
+[ApiVersion("1.0")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class CustomerController(IMediator mediator) : ControllerBase
 {
     #region Constants

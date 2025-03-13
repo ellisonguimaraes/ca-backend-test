@@ -36,4 +36,10 @@
     <data name="EXTERNAL_API_RETURN_UNSUCCESFULLY_STATUSCODE_MESSAGE" xml:space="preserve">
         <value>The external request to [{0}] {1} failed with status code {2}</value>
     </data>
+    <data name="UNSUPPORTED_API_VERSION_ERROR_CODE" xml:space="preserve">
+        <value>UN001</value>
+    </data>
+    <data name="UNSUPPORTED_API_VERSION_ERROR_MESSAGE" xml:space="preserve">
+        <value>The specified version is not supported for this route.</value>
+    </data>
 </root>

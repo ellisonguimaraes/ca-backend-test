@@ -19,6 +19,7 @@ using BillingManager.Domain.Configurations.PerfomanceConfiguration;
 using BillingManager.Domain.Entities;
 using BillingManager.Domain.Exceptions;
 using BillingManager.Domain.Utils;
+using BillingManager.Infra.CrossCutting.IoC.Versioning;
 using BillingManager.Infra.Data;
 using BillingManager.Infra.Data.Repositories;
 using BillingManager.Infra.Data.Repositories.Interfaces;
@@ -26,6 +27,8 @@ using BillingManager.Services;
 using BillingManager.Services.HttpClients;
 using BillingManager.Services.Interfaces;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -38,6 +41,15 @@ public static class ServiceCollectionExtensions
 {
     #region Constants
     const string CONNECTION_STRING_NAME = "DefaultConnection";
+    private const bool ASSUME_DEFAULT_VERSION_WHEN_UNSPECIFIED = true;
+    private const string API_DEFAULT_VERSION_PROPERTY = "ApiDefaultVersion";
+    private const bool REPORT_API_VERSIONS = true;
+    private const string HEADER_API_VERSION = "X-Version";
+    private const string QUERY_STRING_API_VERSION = "api-version";
+    private const string MEDIA_TYPE_API_VERSION = "ver";
+    private const string FORMAT_API_VERSION = "'v'VVV";
+    private const bool SUBSTITUTE_API_VERSION_IN_URL = true;
+    private const string DOT = ".";
     #endregion
     
     /// <summary>
@@ -65,6 +77,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<INotificationHandler<DeleteAllPaginatedEntityInCacheNotification<Product>>, DeleteAllPaginatedEntityInCacheNotificationHandler<Product>>();
 
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(PerformanceBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
         
         return services;
     }
@@ -151,12 +164,14 @@ public static class ServiceCollectionExtensions
     {
         services.AddSingleton<BusinessExceptionHandler>();
         services.AddSingleton<ApiExceptionHandler>();
+        services.AddSingleton<CustomUnsupportedApiVersionExceptionHandler>();
         
         services.AddSingleton<IDictionary<Type, IExceptionHandler>>(provider => 
             new Dictionary<Type, IExceptionHandler>
             {
                 { typeof(BusinessException), provider.GetRequiredService<BusinessExceptionHandler>() },
-                { typeof(ApiException), provider.GetRequiredService<ApiExceptionHandler>() }
+                { typeof(ApiException), provider.GetRequiredService<ApiExceptionHandler>() },
+                { typeof(CustomUnsupportedApiVersionException), provider.GetRequiredService<CustomUnsupportedApiVersionExceptionHandler>() }
             });
         
         return services;
@@ -180,5 +195,28 @@ public static class ServiceCollectionExtensions
         services.AddSingleton(redisSettings);
         
         return services;
+    }
+    
+    /// <summary>
+    /// Register versioning services
+    /// </summary>
+    public static void AddApiVersioningConfiguration(this IServiceCollection services, IConfiguration configuration)
+    {
+        var defaultVersion = configuration[API_DEFAULT_VERSION_PROPERTY]!.Split(DOT);
+        var majorVersion = int.Parse(defaultVersion.First());
+        var minorVersion = int.Parse(defaultVersion.Last());
+
+        services.AddApiVersioning(options => {
+            options.AssumeDefaultVersionWhenUnspecified = ASSUME_DEFAULT_VERSION_WHEN_UNSPECIFIED;
+            options.DefaultApiVersion = new ApiVersion(majorVersion, minorVersion);
+            options.ReportApiVersions = REPORT_API_VERSIONS;
+            options.ApiVersionReader = new MediaTypeApiVersionReader(MEDIA_TYPE_API_VERSION);
+            options.ErrorResponses = new CustomVersioningErrorResponseProvider();
+        });
+        
+        services.AddVersionedApiExplorer(setup => {
+            setup.GroupNameFormat = FORMAT_API_VERSION;
+            setup.SubstituteApiVersionInUrl = SUBSTITUTE_API_VERSION_IN_URL;
+        });
     }
 }

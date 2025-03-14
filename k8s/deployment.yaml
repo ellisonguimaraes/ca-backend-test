@@ -1,3 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: billing-api-config
+data:
+  CONNECTION_STRINGS: "User ID=user01;Password=Abcd@1234;Host=postgres-service;Port=5432;Database=billingmanagerdb;Pooling=true;"
+  REDIS_HOST: "redis-service:6379,password=Abcd@1234"
+  SEQ_SERVER_URL: "http://seq-service:80/"
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,11 +28,20 @@ spec:
         - containerPort: 8080
         env:
         - name: ConnectionStrings__DefaultConnection
-          value: "User ID=user01;Password=Abcd@1234;Host=postgres-service;Port=5432;Database=billingmanagerdb;Pooling=true;"
+          valueFrom:
+            configMapKeyRef:
+              name: billing-api-config
+              key: CONNECTION_STRINGS
         - name: RedisSettings__Host
-          value: "redis-service:6379,password=Abcd@1234"
+          valueFrom:
+            configMapKeyRef:
+              name: billing-api-config
+              key: REDIS_HOST
         - name: Serilog__WriteTo__0__Args__serverUrl
-          value: "http://seq-service:80/"
+          valueFrom:
+            configMapKeyRef:
+              name: billing-api-config
+              key: SEQ_SERVER_URL
         resources:
           limits:
             memory: "1Gi"

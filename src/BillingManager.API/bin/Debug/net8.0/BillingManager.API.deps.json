@@ -1446,7 +1446,11 @@
       },
       "BillingManager.Domain/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc": "2.3.0"
+          "Microsoft.AspNetCore.Mvc": "2.3.0",
+          "Microsoft.AspNetCore.Mvc.Versioning": "5.1.0",
+          "Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer": "5.1.0",
+          "Swashbuckle.AspNetCore": "6.6.2",
+          "Swashbuckle.AspNetCore.Annotations": "7.3.1"
         },
         "runtime": {
           "BillingManager.Domain.dll": {

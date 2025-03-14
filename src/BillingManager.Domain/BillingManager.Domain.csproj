@@ -8,6 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning.ApiExplorer" Version="5.1.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="7.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -25,14 +29,14 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.AspNetCore.Mvc.Versioning">
-      <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.mvc.versioning\5.1.0\lib\net6.0\Microsoft.AspNetCore.Mvc.Versioning.dll</HintPath>
-    </Reference>
-    <Reference Include="Swashbuckle.AspNetCore.Annotations">
-      <HintPath>..\..\..\..\..\.nuget\packages\swashbuckle.aspnetcore.annotations\7.3.1\lib\net8.0\Swashbuckle.AspNetCore.Annotations.dll</HintPath>
-    </Reference>
-  </ItemGroup>
+<!--  <ItemGroup>-->
+<!--    <Reference Include="Microsoft.AspNetCore.Mvc.Versioning">-->
+<!--      <HintPath>..\..\..\..\..\.nuget\packages\microsoft.aspnetcore.mvc.versioning\5.1.0\lib\net6.0\Microsoft.AspNetCore.Mvc.Versioning.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="Swashbuckle.AspNetCore.Annotations">-->
+<!--      <HintPath>..\..\..\..\..\.nuget\packages\swashbuckle.aspnetcore.annotations\7.3.1\lib\net8.0\Swashbuckle.AspNetCore.Annotations.dll</HintPath>-->
+<!--    </Reference>-->
+<!--  </ItemGroup>-->
 
   <!-- SWAGGER XML COMMENTS -->
   <PropertyGroup>

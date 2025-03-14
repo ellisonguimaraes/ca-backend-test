@@ -19,14 +19,10 @@ public class GetAllCustomerQueryHandler(
 {
     public async Task<PagedList<CustomerQueryResponse>> Handle(GetAllCustomerQuery request, CancellationToken cancellationToken)
     {
-        var cacheKey = $"{nameof(Customer).ToLower()}:paginated:{request.PageSize}:{request.PageNumber}";
-        
-        var cachedPagedCustomers = await cache.GetAsync<PagedList<Customer>>(cacheKey);
-
-        if (cachedPagedCustomers is not null)
+        if (TryGetCachePagedCustomer(request.PageSize, request.PageNumber, out var cachedPagedCustomers))
         {
             return new PagedList<CustomerQueryResponse>(
-                cachedPagedCustomers.Items.Select(mapper.Map<CustomerQueryResponse>), 
+                cachedPagedCustomers!.Items.Select(mapper.Map<CustomerQueryResponse>), 
                 cachedPagedCustomers.CurrentPage, 
                 cachedPagedCustomers.PageSize, 
                 cachedPagedCustomers.TotalCount);
@@ -43,5 +39,19 @@ public class GetAllCustomerQueryHandler(
             pagedCustomers.TotalCount);
 
         return pagedGetAllCustomerQueryResponse;
+    }
+
+    /// <summary>
+    /// Try to get paginated customer in Distributed Cache
+    /// </summary>
+    /// <param name="pageSize">Page size</param>
+    /// <param name="pageNumber">Page number</param>
+    /// <param name="customers">Customers</param>
+    /// <returns>Get or not boolean</returns>
+    private bool TryGetCachePagedCustomer(int pageSize, int pageNumber, out PagedList<Customer>? customers)
+    {
+        var cacheKey = $"{nameof(Customer).ToLower()}:paginated:{pageSize}:{pageNumber}";
+        customers = cache.GetAsync<PagedList<Customer>>(cacheKey).Result;
+        return customers is not null;
     }
 }

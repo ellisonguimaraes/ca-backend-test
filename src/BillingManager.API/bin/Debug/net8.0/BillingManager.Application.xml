@@ -332,6 +332,16 @@
             <param name="cache">Cache service</param>
             <param name="configuration">Configuration file (appsettings)</param>
         </member>
+        <member name="T:BillingManager.Application.Profiles.BillingLineProfile">
+            <summary>
+            AutoMapper profile for billing lines
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Profiles.BillingProfile">
+            <summary>
+            AutoMapper profile for billing
+            </summary>
+        </member>
         <member name="T:BillingManager.Application.Profiles.CustomerProfile">
             <summary>
             AutoMapper profile for customer
@@ -403,6 +413,15 @@
             Get all customers handler (with pagination)
             </summary>
         </member>
+        <member name="M:BillingManager.Application.Queries.Customers.GetAll.GetAllCustomerQueryHandler.TryGetCachePagedCustomer(System.Int32,System.Int32,BillingManager.Domain.Utils.PagedList{BillingManager.Domain.Entities.Customer}@)">
+            <summary>
+            Try to get paginated customer in Distributed Cache
+            </summary>
+            <param name="pageSize">Page size</param>
+            <param name="pageNumber">Page number</param>
+            <param name="customers">Customers</param>
+            <returns>Get or not boolean</returns>
+        </member>
         <member name="T:BillingManager.Application.Queries.Customers.GetById.GetCustomerByIdQuery">
             <summary>
             Get customer by id query
@@ -440,6 +459,15 @@
             <summary>
             Get all products handler (with pagination)
             </summary>
+        </member>
+        <member name="M:BillingManager.Application.Queries.Products.GetAll.GetAllProductQueryHandler.TryGetCachePagedProducts(System.Int32,System.Int32,BillingManager.Domain.Utils.PagedList{BillingManager.Domain.Entities.Product}@)">
+            <summary>
+            Try to get paginated product in Distributed Cache
+            </summary>
+            <param name="pageSize">Page size</param>
+            <param name="pageNumber">Page number</param>
+            <param name="products">Products</param>
+            <returns>Get or not boolean</returns>
         </member>
         <member name="T:BillingManager.Application.Queries.Products.GetById.GetProductByIdQuery">
             <summary>
@@ -483,6 +511,21 @@
         <member name="T:BillingManager.Application.Validators.CreateProductCommandValidator">
             <summary>
             CreateProductCommand validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.GetAllCustomerQueryValidator">
+            <summary>
+            GetAllCustomerQuery validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.GetAllProductQueryValidator">
+            <summary>
+            GetAllProductQuery validator
+            </summary>
+        </member>
+        <member name="T:BillingManager.Application.Validators.PaginationParametersValidation">
+            <summary>
+            PaginationParameters generic validator
             </summary>
         </member>
         <member name="T:BillingManager.Application.Validators.UpdateCustomerCommandValidator">

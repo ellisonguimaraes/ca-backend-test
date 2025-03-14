@@ -25,12 +25,18 @@ public class PerformanceBehavior<TRequest, TResponse>(ILogger<PerformanceBehavio
         if (handlerTimeout is not null)
         {
             if (elapsedMilliseconds > handlerTimeout.TimeoutInMilliseconds)
-                logger.LogWarning($"{typeof(TRequest).Name} executed in {elapsedMilliseconds}ms. This handle limit is {handlerTimeout.TimeoutInMilliseconds}ms");
+                logger.LogWarning("{Handler} executed in {ElapsedMilliseconds}ms. This handle limit is {HandlerTimeout}ms", 
+                    typeof(TRequest).Name,
+                    elapsedMilliseconds,
+                    handlerTimeout.TimeoutInMilliseconds);
         }
         else
         {
             if (elapsedMilliseconds > configuration.DefaultTimeoutInMilliseconds)
-                logger.LogWarning($"{typeof(TRequest).Name} executed in {elapsedMilliseconds}ms. Default timeout is {configuration.DefaultTimeoutInMilliseconds}ms");
+                logger.LogWarning("{Handler} executed in {ElapsedMilliseconds}ms. Default timeout is {DefaultTimeout}ms",
+                    typeof(TRequest).Name,
+                    elapsedMilliseconds,
+                    configuration.DefaultTimeoutInMilliseconds);
         }
         
         return response;

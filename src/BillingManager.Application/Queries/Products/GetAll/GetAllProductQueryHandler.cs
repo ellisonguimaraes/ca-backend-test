@@ -19,14 +19,10 @@ public class GetAllProductQueryHandler(
 {
     public async Task<PagedList<ProductQueryResponse>> Handle(GetAllProductQuery request, CancellationToken cancellationToken)
     {
-        var cacheKey = $"{nameof(Product).ToLower()}:paginated:{request.PageSize}:{request.PageNumber}";
-        
-        var cachedPagedProducts = await cache.GetAsync<PagedList<Product>>(cacheKey);
-
-        if (cachedPagedProducts is not null)
+        if (TryGetCachePagedProducts(request.PageSize, request.PageNumber, out var cachedPagedProducts))
         {
             return new PagedList<ProductQueryResponse>(
-                cachedPagedProducts.Items.Select(mapper.Map<ProductQueryResponse>), 
+                cachedPagedProducts!.Items.Select(mapper.Map<ProductQueryResponse>), 
                 cachedPagedProducts.CurrentPage, 
                 cachedPagedProducts.PageSize, 
                 cachedPagedProducts.TotalCount);
@@ -43,5 +39,19 @@ public class GetAllProductQueryHandler(
             pagedProducts.TotalCount);
 
         return pagedGetAllProductQueryResponse;
+    }
+    
+    /// <summary>
+    /// Try to get paginated product in Distributed Cache
+    /// </summary>
+    /// <param name="pageSize">Page size</param>
+    /// <param name="pageNumber">Page number</param>
+    /// <param name="products">Products</param>
+    /// <returns>Get or not boolean</returns>
+    private bool TryGetCachePagedProducts(int pageSize, int pageNumber, out PagedList<Product>? products)
+    {
+        var cacheKey = $"{nameof(Product).ToLower()}:paginated:{pageSize}:{pageNumber}";
+        products = cache.GetAsync<PagedList<Product>>(cacheKey).Result;
+        return products is not null;
     }
 }

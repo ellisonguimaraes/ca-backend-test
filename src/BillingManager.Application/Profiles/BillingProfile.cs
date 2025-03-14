@@ -4,6 +4,9 @@ using BillingManager.Domain.HttpClient;
 
 namespace BillingManager.Application.Profiles;
 
+/// <summary>
+/// AutoMapper profile for billing
+/// </summary>
 public class BillingProfile : Profile
 {
     public BillingProfile()

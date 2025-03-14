@@ -4,6 +4,9 @@ using FluentValidation;
 
 namespace BillingManager.Application.Validators;
 
+/// <summary>
+/// PaginationParameters generic validator
+/// </summary>
 public abstract class PaginationParametersValidation : AbstractValidator<PaginationParameters>
 {
     protected PaginationParametersValidation()

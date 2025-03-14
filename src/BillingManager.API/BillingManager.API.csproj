@@ -4,6 +4,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,12 @@
     <ProjectReference Include="..\BillingManager.Infra.Data\BillingManager.Infra.Data.csproj" />
     <ProjectReference Include="..\BillingManager.Application\BillingManager.Application.csproj" />
     <ProjectReference Include="..\BillingManager.Infra.CrossCutting.IoC\BillingManager.Infra.CrossCutting.IoC.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="..\..\.dockerignore">
+      <Link>.dockerignore</Link>
+    </Content>
   </ItemGroup>
   
   <!-- SWAGGER XML COMMENTS -->

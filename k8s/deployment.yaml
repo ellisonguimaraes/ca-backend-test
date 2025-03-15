@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
       - name: billing-api
-        image: ellisonguimaraes/billing-api:v1
+        image: ellisonguimaraes/billing-api:v2
         ports:
         - containerPort: 8080
         env:

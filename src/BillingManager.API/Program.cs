@@ -1,6 +1,8 @@
 using BillingManager.API.Middlewares;
 using BillingManager.Infra.CrossCutting.IoC;
+using BillingManager.Infra.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 #region Constants
 const string PATH_HEALTH_CHECK = "/health";
@@ -41,6 +43,13 @@ app.ConfigureSwagger();
 app.MapHealthChecks(PATH_HEALTH_CHECK);
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+// Only tests 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+    context.Database.Migrate();
+}
 
 app.MapControllers();
 

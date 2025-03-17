@@ -142,8 +142,98 @@ Também utilizamos o Swagger para a documentação da API, facilitando a visuali
 
 ### 2.1.12. Docker e Kubernetes
 
-...
+No projeto, foi elaborado um **Dockerfile** dentro da API para a construção da imagem Docker correspondente, que foi posteriormente publicada no repositório [`ellisonguimaraes/billing-api:v2`](https://hub.docker.com/r/ellisonguimaraes/billing-api). Além da criação da imagem Docker, foram desenvolvidos diversos recursos para possibilitar a execução do projeto em um *cluster* local utilizando o **Kind**.
+
+#### 📌 Manifesto `seq.yaml`: 
+Responsável pela implantação do servidor de *logs* **SEQ** no *cluster*, contendo:
+- Uma **Secret** denominada `seq-secret`, que armazena as credenciais de acesso (usuário e senha) ao SEQ;
+- Um **StatefulSet** chamado `seq`, contendo a configuração do servidor de *logs* **SEQ**;
+- Um **Service** `seq-service` do tipo **NodePort**, que expõe o SEQ externamente ao *cluster* na porta `30004`.
+
+#### 📌 Manifesto `redis.yaml`:
+Define a implantação do **Redis** para *cache* distribuído no *cluster*, contendo:
+- Uma **Secret** `redis-secret` e um **ConfigMap** `redis-config`, que armazenam as informações de credenciais e configuração do Redis;
+- Um **StatefulSet** denominado `redis`, responsável pela execução do Redis;
+- Um **Service** `redis-service` do tipo **NodePort**, permitindo acesso externo ao Redis através da porta `30003`.
+
+#### 📌 Manifesto `postgres.yaml`:
+Define a configuração do banco de dados **PostgreSQL** dentro do *cluster*, incluindo:
+- Uma **Secret** `postgres-secret` e um **ConfigMap** `postgres-config`, que armazenam as credenciais de acesso (usuário, senha e banco de dados);
+- Um **StatefulSet** `postgres`, contendo a imagem do PostgreSQL;
+- Um **Service** `postgres-service` do tipo **NodePort**, que permite o acesso externo ao banco de dados pela porta `30002`.
+
+#### 📌 Manifesto `ingress-nginx.yaml`:
+Responsável pela instalação do **Nginx Ingress Controller**, configurado para expor o *ingress* na porta `30000`.  
+> ⚠️ **Observação:** Este é o primeiro manifesto que deve ser aplicado ao *cluster*.
+
+#### 📌 Manifesto `deployment.yaml`:
+Define a implantação da aplicação, contendo:
+- Um **Deployment** que instancia a aplicação utilizando a imagem `ellisonguimaraes/billing-api:v2`.
+- Um **Service** `billing-api-service` do tipo **ClusterIP**, tornando a aplicação acessível via *ingress*.
+- Um **ConfigMap** `billing-api-config`, contendo as *strings* de conexão com o PostgreSQL, Redis e SEQ.
+
+O *deployment* deste projeto inclui três tipos de ***probes*** para monitoramento e garantir a disponibilidade da aplicação:
+
+- **Liveness Probe**: Responsável por verificar se a aplicação está em execução. Para isso, ela realiza requisições à rota de *health check* `/health`. Caso a verificação falhe, o Kubernetes entende que o contêiner está travado ou não responde corretamente e realiza sua reinicialização automática.
+- **Readiness Probe**: Utilizada para determinar se a aplicação está pronta para receber requisições, também através do *health check*. Enquanto essa verificação não for bem-sucedida, o Kubernetes não encaminha tráfego para o pod, evitando que requisições sejam enviadas para instâncias ainda em processo de inicialização ou que não estejam operacionais.
+- **Startup Probe**: Garantia de que a aplicação tenha tempo suficiente para iniciar antes que as outras probes comecem a atuar. Essa probe é especialmente útil para aplicações que possuem um tempo de inicialização mais longo, evitando que o Kubernetes reinicie o contêiner prematuramente.
+
+#### 📌 Manifesto `ingress.yaml`:
+Define o **Ingress**, responsável por expor a aplicação e direcionar o tráfego para o *Service* `billing-api-service`. Como o **Nginx Ingress Controller** está mapeado na porta `30000`, a aplicação aqui desenvolvida será acessível por esta porta.
+
 
 ## 3. Executando a Aplicação
 
-...
+### 3.1. Através dos arquivos manifestos Kubernetes
+
+Para que o projeto funcione corretamente, é necessário ter os seguintes componentes instalados:  
+
+1. **Docker** instalado na máquina;
+2. **kubectl**, a ferramenta de linha de comando do Kubernetes. Para instalar, consulte a documentação oficial: [Kubernetes CLI](https://kubernetes.io/docs/tasks/tools/);
+3. **Kind** (Kubernetes in Docker), utilizado para criar um *cluster* local. O guia de instalação pode ser encontrado em: [Kind Quick Start](https://kind.sigs.k8s.io/docs/user/quick-start/#installation).  
+
+O primeiro passo é criar um *cluster* local utilizando o **Kind**. Para isso, use o arquivo de configuração `kind-config.yaml` e execute o seguinte comando:  
+
+```shell
+kind create cluster --name cluster-nexer --config kind-config.yaml
+```
+
+Após a criação do *cluster*, é necessário aplicar os arquivos de manifesto na ordem correta. Isso pode ser feito utilizando o comando abaixo:
+
+```sh
+kubectl apply -f <file_name>.yaml
+```
+
+> Para que o arquivo `ingress.yaml` consiga ser aplicado, a instalação do ***Nginx Ingress Controller*** (do arquivo `ingress-nginx.yaml`) precisa estar rodando e funcional, ou seja, pode demorar um pouco até finalizar a instalação.
+
+Para cada um dos arquivos, seguindo esta ordem:
+
+1. `ingress-nginx.yaml`;
+2. `seq.yaml`;
+3. `redis.yaml`;
+4. `postgres.yaml`;
+5. `deployment.yaml`.
+6. `ingress.yaml`;
+
+O arquivo `kind-config.yaml` na criação do *cluster* local expoe externamente para acesso as portas:
+- `30000` referente ao *ingress* que aponta para nossa aplicação desenvolvida, logo você pode acessar através desta porta a aplicação; 
+- `30002` do PostgreSQL. Caso queira acessar localmente basta acessar com o `localhost` com a porta, o usuário `user01` e a senha `Abcd@1234`; 
+- `30003` do Redis, onde basta acessar localmente pela porta utilizando a senha `Abcd@1234`; 
+- `30004` do SEQ, que pode acessar através do navegador com a porta, onde o primeiro *login* é necessário ser feito utilizando as credenciais `admin` com senha `Abcd@1234`.
+
+### 3.2. Através dos arquivos do projeto
+
+Para executar o projeto localmente, é necessário ter os seguintes componentes instalados:
+
+- **.NET 8.0** (dotnet), garantindo compatibilidade com a aplicação;
+- **Redis**, utilizado para cache distribuído;
+- **PostgreSQL**, que servirá como banco de dados principal;
+- O servidor de *logs* **SEQ**, para monitoramento da aplicação.
+
+Após isso, basta configurar no arquivo `appsettings.json` no projeto de API as conexões para cada um dos componentes acima, utilizando:
+
+- O `ConnectionStrings.DefaultConnection` para a *string* de conexão do **PostgreSQL**;
+- O `Serilog.WriteTo[0].Args.serverUrl` para definir conexão do **SEQ**;
+- O `RedisSettings.Host` para definir o *host* do **Redis**.
+
+E com isso, aplicar o `dotnet build` e `dotnet run` no projeto, podendo acessar o projeto no `localhost:5000` (**Swagger**).

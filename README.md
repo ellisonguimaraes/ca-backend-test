@@ -144,6 +144,9 @@ Também utilizamos o Swagger para a documentação da API, facilitando a visuali
 
 No projeto, foi elaborado um **Dockerfile** dentro da API para a construção da imagem Docker correspondente, que foi posteriormente publicada no repositório [`ellisonguimaraes/billing-api:v2`](https://hub.docker.com/r/ellisonguimaraes/billing-api). Além da criação da imagem Docker, foram desenvolvidos diversos recursos para possibilitar a execução do projeto em um *cluster* local utilizando o **Kind**.
 
+> ⚠️ **Observação:** \
+> Todos os arquivos referente ao Kubernetes estão na pasta `\k8s`.
+
 #### 📌 Manifesto `seq.yaml`: 
 Responsável pela implantação do servidor de *logs* **SEQ** no *cluster*, contendo:
 - Uma **Secret** denominada `seq-secret`, que armazena as credenciais de acesso (usuário e senha) ao SEQ;
@@ -185,6 +188,9 @@ Define o **Ingress**, responsável por expor a aplicação e direcionar o tráfe
 ## 3. Executando a Aplicação
 
 ### 3.1. Através dos arquivos manifestos Kubernetes
+
+> ⚠️ **Observação:** \
+> Todos os arquivos referente ao Kubernetes estão na pasta `\k8s`.
 
 Para que o projeto funcione corretamente, é necessário ter os seguintes componentes instalados:  
 
